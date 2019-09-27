@@ -12,7 +12,8 @@ If you don't already have OpenShift available a good place to start is by using 
 ## Deploying Keycloak
 First of all create a new project in OpenShift with oc by running:
 
-oc new-project keycloak
+    oc new-project keycloak
+
 The next thing to do is to import the Keycloak template into OpenShift, by running:
 
 ```bash
@@ -52,6 +53,7 @@ Make the following changes:
 - Insecure Traffic: Redirect
 - Deployment Config
   * KEYCLOAK_URL=https://secure-keycloak-keycloak.192.168.42.52.nip.io/auth
+
 Replace the value for KEYCLOAK_URL with the URL for Keycloak. You can find this by going back to the tab with the Keycloak admin console (copy the URL up to and including "/auth").
 Click on Create then Continue to the project overview. Wait for the build and deployment to complete then click on the link to the application. You should see "Not found!". Add "/service/public" to the url and you should see "message: public" in JSON.
 
@@ -71,6 +73,7 @@ Make the following changes:
 - Deployment Config
   * KEYCLOAK_URL=https://secure-keycloak-keycloak.192.168.42.52.nip.io/auth
   * SERVICE_URL=https://service-keycloak.192.168.42.240.nip.io/service
+
 Replace the value for KEYCLOAK_URL with the URL for Keycloak. You can find this by going back to the tab with the Keycloak admin console (copy the URL up to and including "/auth"). Also, replace the value for SERVICE_URL with the URL for the Service. You can find this by going back to the tab with the service (copy the URL up to and including "/service").
 Click on Create then Continue to the project overview. Wait for the build and deployment to complete then click on the link to the application. You should already be logged-in. You can now invoke the service by clicking on Invoke Public to invoke the unsecured endpoint or Invoke Admin to invoke the endpoint secured with the admin role. If you click on Invoke Secured it will fail as the admin user you are logged in with does not have the user role. To be able to invoke this endpoint as well go back to the Keycloak admin console. Create a realm role named user. Then go to users find your admin user and under role mappings add the user role to the user.
 
